@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000';
+import { buildApiUrl } from '../../lib/api';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -13,7 +12,7 @@ export default function AdminLogin() {
     setError('');
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/api/auth/login`, {
+      const res = await fetch(buildApiUrl('/api/auth/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

@@ -9,6 +9,7 @@ Create `.env` (copy from `config/env.example`):
 - `JWT_EXPIRES_IN`
 - `ADMIN_EMAIL` (optional)
 - `PORT`
+- `CORS_ORIGINS` (comma-separated frontend origins)
 
 ## Setup
 
@@ -44,7 +45,8 @@ npm start
 
 - Push repo to GitHub
 - Create a new Web Service (Render) or App (Heroku)
-- Set environment variables: `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `ADMIN_EMAIL`, `PORT`
+- Set environment variables: `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `ADMIN_EMAIL`, `PORT`, `CORS_ORIGINS`
+- Example `CORS_ORIGINS`: `https://your-frontend.vercel.app,http://localhost:3000`
 - Build command: `npm install`
 - Start command: `npm start`
 - After deploy, verify `GET /api/health` returns `{ status: 'ok' }`

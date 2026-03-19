@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProjectCard from './ProjectCard';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000';
+import { buildApiUrl } from '../lib/api';
 
 export default function ProjectsGrid() {
   const [projects, setProjects] = useState([]);
@@ -11,7 +10,7 @@ export default function ProjectsGrid() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`${API_BASE}/api/projects`);
+        const res = await fetch(buildApiUrl('/api/projects'));
         if (!res.ok) throw new Error('Failed to load projects');
         const data = await res.json();
         setProjects(Array.isArray(data) ? data : data.projects || []);

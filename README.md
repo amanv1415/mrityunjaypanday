@@ -18,3 +18,12 @@ Backend requires: `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `ADMIN_EMAIL` (op
 
 Refer to `backend/config/env.example`.
 
+## Deployment (Separate Frontend + Backend)
+
+1. Deploy `backend/` as a Node web service.
+2. Set backend env vars: `MONGO_URI`, `JWT_SECRET`, `JWT_EXPIRES_IN`, `ADMIN_EMAIL`, `PORT`, `CORS_ORIGINS`.
+3. Verify backend health at `/api/health`.
+4. Deploy `frontend/` as a Next.js app.
+5. Set frontend env var: `NEXT_PUBLIC_API_BASE` to your backend URL.
+6. Redeploy frontend after env var updates.
+

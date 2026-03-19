@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000';
+import { buildApiUrl } from '../lib/api';
 
 function Toast({ type = 'success', message = '', onClose }) {
   if (!message) return null;
@@ -35,7 +34,7 @@ export default function ContactForm() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const res = await fetch(buildApiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, message }),

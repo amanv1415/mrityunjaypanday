@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import ProjectForm from '../../components/Admin/ProjectForm';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:5000';
+import { buildApiUrl } from '../../lib/api';
 
 export default function Dashboard() {
   const [projects, setProjects] = useState([]);
@@ -24,7 +23,7 @@ export default function Dashboard() {
   async function load() {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/api/projects`);
+      const res = await fetch(buildApiUrl('/api/projects'));
       if (!res.ok) throw new Error('Failed to load projects');
       const data = await res.json();
       setProjects(Array.isArray(data) ? data : data.projects || []);
@@ -38,7 +37,7 @@ export default function Dashboard() {
   async function create(payload) {
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/api/projects`, {
+      const res = await fetch(buildApiUrl('/api/projects'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +55,7 @@ export default function Dashboard() {
   async function update(id, payload) {
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_BASE}/api/projects/${id}`, {
+      const res = await fetch(buildApiUrl(`/api/projects/${id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +73,7 @@ export default function Dashboard() {
   async function remove(id) {
     if (!confirm('Delete this project?')) return;
     try {
-      const res = await fetch(`${API_BASE}/api/projects/${id}`, {
+      const res = await fetch(buildApiUrl(`/api/projects/${id}`), {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
